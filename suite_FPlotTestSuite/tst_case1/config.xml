@@ -1,0 +1,7 @@
+<testconfig version="1.0">
+    <information>
+        <summary>Empty line edits</summary>
+        <description>Pressing Plot after each line edit data has been entered to check error message</description>
+    </information>
+    <testsettings/>
+</testconfig>

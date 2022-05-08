@@ -29,6 +29,8 @@ void MainWindow::plot()
        !ui->function->text().length())
     {
         QMessageBox::critical(this,"Error","Please enter data in all fields",QMessageBox::Button::Ok);
+        ui->customPlot->removeGraph(0);
+        ui->customPlot->replot();
         return;
     }
 
@@ -42,22 +44,33 @@ void MainWindow::plot()
     if(maxX<=minX)
     {
         QMessageBox::warning(this,"Error","Max X must be greater than Min X",QMessageBox::Button::Ok);
+        ui->customPlot->removeGraph(0);
+        ui->customPlot->replot();
         return;
     }
     if(minX+step>maxX)
     {
         QMessageBox::warning(this,"Error","Step is too large. Please enter a smaller step",QMessageBox::Button::Ok);
+        ui->customPlot->removeGraph(0);
+        ui->customPlot->replot();
         return;
     }
     if(step<=0.0)
     {
         QMessageBox::warning(this,"Error","Step must be greater than zero",QMessageBox::Button::Ok);
+        ui->customPlot->removeGraph(0);
+        ui->customPlot->replot();
         return;
     }
     if(points > 1e7)
     {
         QMessageBox::StandardButton reply = QMessageBox::question(this,"Warning","Step is too small, which can take some time to plot\nAre you sure you want to continue?",QMessageBox::Button::Yes|QMessageBox::Button::No);
-        if(reply == QMessageBox::No)return;
+        if(reply == QMessageBox::No)
+        {
+            ui->customPlot->removeGraph(0);
+            ui->customPlot->replot();
+            return;
+        }
     }
 
     //curr is current value of x
@@ -81,6 +94,8 @@ void MainWindow::plot()
     if(!parser.compile(expression_string,exp))
     {
         QMessageBox::critical(this,"Error","Function is invalid. Please enter a valid function of x",QMessageBox::Button::Ok);
+        ui->customPlot->removeGraph(0);
+        ui->customPlot->replot();
         return;
     }
 

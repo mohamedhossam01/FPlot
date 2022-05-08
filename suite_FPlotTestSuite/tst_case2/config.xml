@@ -1,0 +1,7 @@
+<testconfig version="1.0">
+    <information>
+        <summary>Valid functions</summary>
+        <description>Testing program with various functions such as sin, abs, a^x, polynomial</description>
+    </information>
+    <testsettings/>
+</testconfig>
